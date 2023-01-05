@@ -34,23 +34,20 @@ contract RockPaperScissors is Ownable {
     }
 
 
-    function rand() internal view returns(uint256) {
-        //Generates a random number between 0 and 999.
-        uint256 seed = uint256(keccak256(abi.encodePacked(
-            block.timestamp + block.difficulty +
-            ((uint256(keccak256(abi.encodePacked(block.coinbase)))) / (block.timestamp)) +
-            block.gaslimit + 
-            ((uint256(keccak256(abi.encodePacked(msg.sender)))) / (block.timestamp)) +
-            block.number
-        )));
-        return (seed - ((seed / 1000) * 1000));
+    function randMod() internal view returns(uint) {
+        //Generates a random number between 0 and 100.
+        uint randNonce = 0;
+        uint modulus = 100;
+        randNonce++;
+        return uint(keccak256(abi.encodePacked(block.timestamp, msg.sender, randNonce))) % modulus;
     }
+
 
     function determineComputerChoice() internal view returns (string memory) {
         //Determine whether the computer chooses rock, paper or scissors.
-        uint border1 = 333;
-        uint border2 = 666;
-        uint randomNumber = rand();
+        uint border1 = 33;
+        uint border2 = 66;
+        uint randomNumber = randMod();
         string memory computerChoice;
 
         if (randomNumber < border1) {
