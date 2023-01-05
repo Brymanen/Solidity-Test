@@ -33,6 +33,7 @@ contract RockPaperScissors is Ownable {
         return outputMessage;
     }
 
+
     function rand() internal view returns(uint256) {
         //Generates a random number between 0 and 999.
         uint256 seed = uint256(keccak256(abi.encodePacked(
