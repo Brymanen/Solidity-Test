@@ -33,7 +33,6 @@ contract RockPaperScissors is Ownable {
         return outputMessage;
     }
 
-
     function randMod() internal view returns(uint) {
         //Generates a random number between 0 and 100.
         uint randNonce = 0;
@@ -41,7 +40,6 @@ contract RockPaperScissors is Ownable {
         randNonce++;
         return uint(keccak256(abi.encodePacked(block.timestamp, msg.sender, randNonce))) % modulus;
     }
-
 
     function determineComputerChoice() internal view returns (string memory) {
         //Determine whether the computer chooses rock, paper or scissors.
