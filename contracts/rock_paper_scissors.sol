@@ -2,11 +2,14 @@
 pragma solidity 0.8.17;
 
 import "./ownable.sol";
+import "./safemath.sol";
 
 contract RockPaperScissors is Ownable {
 
+    using SafeMath for uint256;
+    
     event NewGame(string playerInput, string computerChoice, uint gameOutcome, string outputMessage);
-
+    
     struct Game {
         string playerInput;
         string computerChoice;
@@ -19,25 +22,11 @@ contract RockPaperScissors is Ownable {
     mapping (uint => address) public gameToOwner;
     mapping (address => uint) public ownerGamesCount;
 
-    function playRockPaperScissors(string memory playerInput) public returns (string memory) {
-        string memory computerChoice = determineComputerChoice();
-        uint gameOutcome = determineGameOutcome(playerInput, computerChoice);
-        string memory outputMessage = createOutputMessage(playerInput, computerChoice, gameOutcome);
-        
-        games.push(Game(playerInput, computerChoice, gameOutcome, outputMessage));
-        uint id = games.length - 1;
-        ownerGamesCount[msg.sender]++;
-        gameToOwner[id] = msg.sender;
-        emit NewGame(playerInput, computerChoice, gameOutcome, outputMessage);
-
-        return outputMessage;
-    }
-
     function randMod() internal view returns(uint) {
         //Generates a random number between 0 and 100.
         uint randNonce = 0;
         uint modulus = 100;
-        randNonce++;
+        randNonce == randNonce.add(1);
         return uint(keccak256(abi.encodePacked(block.timestamp, msg.sender, randNonce))) % modulus;
     }
 
