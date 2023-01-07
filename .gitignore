@@ -1,4 +1,4 @@
 .git
 .contracts/artifacts
 .utils/artifacts
-.prettierrc.json
+*.json

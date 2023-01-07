@@ -24,13 +24,13 @@ contract RockPaperScissorsHelper is RockPaperScissors {
     function getGamesByOwner(address _owner) external view returns(uint[] memory) {
         uint[] memory result = new uint[](ownerGamesCount[_owner]);
         uint counter = 0;
-        for (uint i = 0; i < games.length; i.add(1)) {
-        if (gameToOwner[i] == _owner) {
-            result[counter] = i;
-            counter = counter.add(1);
+        for (uint i = 0; i < games.length; i = i.add(1)) {
+            if (gameToOwner[i] == _owner) {
+                result[counter] = i;
+                counter = counter.add(1);
+            }
         }
-    }
-    return result;
+        return result;
     }
 
     function playRockPaperScissors(string memory playerInput) public payable returns (string memory) {
